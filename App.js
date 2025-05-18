@@ -8,6 +8,7 @@ import MealOverviewScreen from "./Screens/MealOverviewScreen";
 import MealDetailScreen from "./Screens/MealDetailScreen";
 import FavouriteScreen from "./Screens/FavouriteScreen";
 import { Ionicons } from "@expo/vector-icons";
+import FavouriteContextProvider from "./store/context/favourite-context";
 
 const stack = createNativeStackNavigator();
 const drawer = createDrawerNavigator();
@@ -51,33 +52,38 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <View style={styles.container}>
-        <NavigationContainer>
-          <stack.Navigator
-            screenOptions={{
-              headerStyle: { backgroundColor: "#351401" },
-              headerTintColor: "white",
-              contentStyle: { backgroundColor: "#3f2f25" },
-            }}
-          >
-            <stack.Screen
-              name="Drawer"
-              component={DrawerNavigator}
-              options={{
-                headerShown: false,
+      <FavouriteContextProvider>
+        <View style={styles.container}>
+          <NavigationContainer>
+            <stack.Navigator
+              screenOptions={{
+                headerStyle: { backgroundColor: "#351401" },
+                headerTintColor: "white",
+                contentStyle: { backgroundColor: "#3f2f25" },
               }}
-            />
-            <stack.Screen name="MealsOverview" component={MealOverviewScreen} />
-            <stack.Screen
-              name="MealDetail"
-              component={MealDetailScreen}
-              options={{
-                title: "About the Meal",
-              }}
-            />
-          </stack.Navigator>
-        </NavigationContainer>
-      </View>
+            >
+              <stack.Screen
+                name="Drawer"
+                component={DrawerNavigator}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <stack.Screen
+                name="MealsOverview"
+                component={MealOverviewScreen}
+              />
+              <stack.Screen
+                name="MealDetail"
+                component={MealDetailScreen}
+                options={{
+                  title: "About the Meal",
+                }}
+              />
+            </stack.Navigator>
+          </NavigationContainer>
+        </View>
+      </FavouriteContextProvider>
     </>
   );
 }
@@ -86,5 +92,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 50,
+    backgroundColor: '#24180f"',
   },
 });
